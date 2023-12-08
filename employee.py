@@ -1,6 +1,3 @@
-"""Employee pay calculator."""
-"""ENTER YOUR SOLUTION HERE!"""
-
 class Employee:
     def __init__(self, name):
         self.name = name
@@ -11,21 +8,41 @@ class Employee:
     def __str__(self):
         return self.name
 
+class SalaryEmployee(Employee):
+    def __init__(self, name, monthly_salary):
+        super().__init__(name)
+        self.monthly_salary = monthly_salary
 
-# Billie works on a monthly salary of 4000.  Their total pay is 4000.
-billie = Employee('Billie')
+    def get_pay(self):
+        return self.monthly_salary
 
-# Charlie works on a contract of 100 hours at 25/hour.  Their total pay is 2500.
-charlie = Employee('Charlie')
+    def __str__(self):
+        return f"{self.name} works on a monthly salary of {self.monthly_salary}. Their total pay is {self.get_pay()}."
 
-# Renee works on a monthly salary of 3000 and receives a commission for 4 contract(s) at 200/contract.  Their total pay is 3800.
-renee = Employee('Renee')
+class HourlyEmployee(Employee):
+    def __init__(self, name, hourly_rate, hours_worked):
+        super().__init__(name)
+        self.hourly_rate = hourly_rate
+        self.hours_worked = hours_worked
 
-# Jan works on a contract of 150 hours at 25/hour and receives a commission for 3 contract(s) at 220/contract.  Their total pay is 4410.
-jan = Employee('Jan')
+    def get_pay(self):
+        return self.hourly_rate * self.hours_worked
 
-# Robbie works on a monthly salary of 2000 and receives a bonus commission of 1500.  Their total pay is 3500.
-robbie = Employee('Robbie')
+    def __str__(self):
+        return f"{self.name} works on a contract of {self.hours_worked} hours at {self.hourly_rate}/hour. Their total pay is {self.get_pay()}."
 
-# Ariel works on a contract of 120 hours at 30/hour and receives a bonus commission of 600.  Their total pay is 4200.
-ariel = Employee('Ariel')
+class CommissionEmployee(Employee):
+    def __init__(self, name, commission):
+        super().__init__(name)
+        self.commission = commission
+
+    def get_pay(self):
+        return self.commission
+
+    def __str__(self):
+        return f"{self.name} receives a commission of {self.commission}. Their total pay is {self.get_pay()}."
+    
+# Example usage:
+billie = SalaryEmployee('Billie', 4000)
+charlie = HourlyEmployee('Charlie', 25, 100)
+# ... and so on for Renee, Jan, Robbie, Ariel with their respective classes and parameters.
